@@ -1,8 +1,11 @@
 ########################################
 # Author: Arthur M Passos, 2024
 ########################################
-# Matrix Multiplication using Bend's default Lists type 
-# It transposes the second matrix and just multiplies the lines
+# Matrix Multiplication using Bend's default recursive Lists type
+# 
+# The matrix here is represented by the List of Lists. Multiplies 
+# a matrix A and matrix B. It transposes B and and proceeds to 
+# consume all B collumns to each line of A.
 
 ########################################
 ############## List utils ##############
