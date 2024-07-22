@@ -1,0 +1,45 @@
+cd ~/personal/bendStuff/Bend/examples/scripts
+
+~/perf-build/WSL2-Linux-Kernel/tools/perf/perf record -F 99 -p $(pgrep bend run-c ../programs/bitonic_sort.bend) -g -- sleep 10
+
+python3 ./dataset_gen.py && python3 ./list_tree_convert.py
+
+gcc -fopenmp -o ../programs/omp_bitonic_sort ../programs/omp_bitonic_sort.c
+
+################################
+Small Dataset with Uniform Distribution:
+    Description: A relatively small dataset where all elements are uniformly distributed.
+    Purpose: To measure the overhead of parallelism on small datasets and how well each algorithm performs when the benefit of parallelism might be limited due to small data size.
+    Dataset Example: 2^15 integers uniformly distributed between 0 and 100,000.
+
+Large Dataset with Random Distribution:
+    Description: A large dataset with elements randomly distributed.
+    Purpose: To evaluate the scalability and efficiency of parallel algorithms when handling large datasets, which is where parallelism should shine.
+    Dataset Example: 2^19 integers randomly distributed between 0 and 1,000,000.
+
+Large Dataset with Skewed Distribution:
+    Description: A large dataset with a skewed distribution, such as many duplicate values or values following a particular pattern (e.g., a power-law distribution).
+    Purpose: To test how well each algorithm handles non-uniform data distributions, which can affect performance differently in parallel scenarios.
+    Dataset Example: 2^19 integers where 80% of the values are within the range 0-1000, and the remaining 20% are between 1001 and 1,000,000.
+
+
+
+
+
+gcc -fopenmp -o ../programs/omp_bitonic_sort ../programs/omp_bitonic_sort.c 
+
+bend gen-c ../programs-original/parse_into_list.bend > out.c && gcc -o ./out.bin ./out.c && ./out.bin
+
+
+
+
+
+### Run all
+python3 ./dataset_gen.py && python3 ./list_tree_convert.py && python3 ./apply_datasets_gen.py
+
+HVM: 2.0.21
+Bend: 0.2.36
+OS: Windows 11 WSL 2 with Ubuntu 22.04.4 LTS
+CPU: Intel i5-1235U
+RAM: 32 GB 
+

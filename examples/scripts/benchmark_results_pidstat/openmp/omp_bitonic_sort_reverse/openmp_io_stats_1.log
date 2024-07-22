@@ -1,0 +1,6 @@
+Linux 5.15.153.1-microsoft-standard-WSL2 (arthur4acolita) 	07/16/24 	_x86_64_	(12 CPU)
+
+02:25:59      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+02:26:00     1000     84901      0.00      0.00      0.00       0  omp_bitonic_sor
+02:26:01     1000     84901      0.00      0.00      0.00       0  omp_bitonic_sor
+02:26:02     1000     84901      0.00      0.00      0.00       0  omp_bitonic_sor

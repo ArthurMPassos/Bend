@@ -1,0 +1,5 @@
+Linux 5.15.153.1-microsoft-standard-WSL2 (arthur4acolita) 	07/16/24 	_x86_64_	(12 CPU)
+
+02:25:41      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:25:42     1000     84548  149.50   65.35    0.00    0.00  214.85     6  omp_bitonic_sor
+02:25:43     1000     84548  150.00   49.00    0.00    0.00  199.00     6  omp_bitonic_sor

@@ -1,0 +1,5 @@
+Linux 5.15.153.1-microsoft-standard-WSL2 (arthur4acolita) 	07/16/24 	_x86_64_	(12 CPU)
+
+02:25:46      UID       PID   cswch/s nvcswch/s  Command
+02:25:47     1000     84665      3.00      1.00  omp_bitonic_sor
+02:25:48     1000     84665      0.00      0.00  omp_bitonic_sor
