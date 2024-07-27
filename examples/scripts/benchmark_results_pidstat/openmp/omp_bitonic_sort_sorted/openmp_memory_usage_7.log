@@ -1,5 +1,0 @@
-Linux 5.15.153.1-microsoft-standard-WSL2 (arthur4acolita) 	07/16/24 	_x86_64_	(12 CPU)
-
-02:27:01      UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
-02:27:02     1000     86122    281.00      0.00  162744    3844   0.01  omp_bitonic_sor
-02:27:03     1000     86122      1.00      0.00  162744    3844   0.01  omp_bitonic_sor

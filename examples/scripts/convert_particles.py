@@ -26,7 +26,7 @@ def parse_particles_from_file(filename):
     for match in particle_pattern.finditer(content):
         px, py, pz = float(match.group('px')), float(match.group('py')), float(match.group('pz'))
         vx, vy, vz = float(match.group('vx')), float(match.group('vy')), float(match.group('vz'))
-        mass = float(match.group('mass')) + 10.0 ** 20.0
+        mass = float(match.group('mass')) #+ 10.0 ** 20.0
         position = Vector3D(px, py, pz)
         velocity = Vector3D(vx, vy, vz)
         particles.append(Particle(position, velocity, mass))
@@ -37,7 +37,7 @@ def generate_python_code(particles):
     code = "particles = [\n"
     for p in particles:
         code += f"    Particle(Vector3D({p.position.x}, {p.position.y}, {p.position.z}), "
-        code += f"Vector3D({p.velocity.x}, {p.velocity.y}, {p.velocity.z}), {p.mass}),\n"
+        code += f"Vector3D({p.velocity.x}, {p.velocity.y}, {p.velocity.z}), {p.mass} * (10 ** 20)),\n"
     code += "]\n"
     return code
 
@@ -47,19 +47,28 @@ def generate_c_code(particles):
         code += "    {"
         code += f"{{ {p.position.x}, {p.position.y}, {p.position.z} }}, "
         code += f"{{ {p.velocity.x}, {p.velocity.y}, {p.velocity.z} }}, "
-        code += f"{p.mass}"
+        code += f"{p.mass} * powl(10, 20)"
         code += "},\n"
     code += "};\n"
     return code
 
+def write_to_file(filename, content):
+    with open(filename, 'w') as file:
+        file.write(content)
+
 # Read particles from file and generate code
-filename = 'particles.txt'
-particles = parse_particles_from_file(filename)
+input_filename = '../datasets/particles_bend.txt'
+particles = parse_particles_from_file(input_filename)
 
 python_code = generate_python_code(particles)
 c_code = generate_c_code(particles)
 
-print("Python Code:\n")
-print(python_code)
-print("\nC Code:\n")
-print(c_code)
+# Write code to respective files
+dir_path = '../datasets/'
+file_python = dir_path + 'particles_python.py'
+file_c = dir_path + 'particles_c.c'
+write_to_file(file_python, python_code)
+write_to_file(file_c, c_code)
+
+print("Python code written to", file_python)
+print("C code written to" , file_c)
