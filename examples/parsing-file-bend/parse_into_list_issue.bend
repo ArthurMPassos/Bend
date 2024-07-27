@@ -18,7 +18,7 @@ def IO/FS/read_line.read_chunks_my(fd, chunks):
   with IO:
     # Read line in 1kB chunks
     chunk <- IO/FS/read(fd, 1024)
-    match res = Bytes/split_once_nl(chunk, '\n'):
+    match res = Bytes/split_once(chunk, '\n'):
       case Result/Ok:
         (line, rest) = res.val
         (length, *) = List/length(rest)
@@ -36,9 +36,9 @@ def main:
   with IO:
     fd <- IO/FS/open("../datasets/sequence_value_issue.txt", "r")
 
-    bytes <- IO/FS/read_line_my(fd)
-    bytes <- IO/FS/read_line_my(fd)
-    bytes <- IO/FS/read_line_my(fd)
+    bytes <- IO/FS/read_line(fd)
+    bytes <- IO/FS/read_line(fd)
+    bytes <- IO/FS/read_line(fd)
 
     txt = Bytes/decode_utf8(bytes)
     return txt
