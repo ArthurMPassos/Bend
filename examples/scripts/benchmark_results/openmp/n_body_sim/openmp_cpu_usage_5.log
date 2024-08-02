@@ -1,0 +1,4 @@
+Linux 5.15.153.1-microsoft-standard-WSL2 (arthur4acolita) 	08/01/24 	_x86_64_	(12 CPU)
+
+01:13:10      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:13:11     1000     56566    0.00    0.00    0.00    0.00    0.00    11  run_full_pidsta

@@ -1,0 +1,4 @@
+Linux 5.15.153.1-microsoft-standard-WSL2 (arthur4acolita) 	08/01/24 	_x86_64_	(12 CPU)
+
+01:13:06      UID       PID   cswch/s nvcswch/s  Command
+01:13:07     1000     56453      0.00      0.00  run_full_pidsta

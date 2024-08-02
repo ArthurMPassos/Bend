@@ -1,0 +1,5 @@
+Linux 5.15.153.1-microsoft-standard-WSL2 (arthur4acolita) 	08/01/24 	_x86_64_	(12 CPU)
+
+01:13:12      UID      TGID       TID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:13:13     1000     56628         -    0.00    0.00    0.00    0.00    0.00     0  run_full_pidsta
+01:13:13     1000         -     56628    0.00    0.00    0.00    0.00    0.00     0  |__run_full_pidsta
