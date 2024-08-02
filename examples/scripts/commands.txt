@@ -24,3 +24,6 @@ OS: Windows 11 WSL 2 with Ubuntu 22.04.4 LTS
 CPU: Intel i5-1235U
 RAM: 32 GB 
 
+bend gen-c ../programs-original/n_body_sim.bend > gcc -o ./bend-bin  _ -lm && time ./bend-bin
+
+gcc -o ../programs-original/n_body_sim ../programs-original/n_body_sim.c -lm && time ../programs-original/n_body_sim

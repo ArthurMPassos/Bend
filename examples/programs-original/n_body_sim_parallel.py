@@ -67,12 +67,21 @@ def simulate(particles, num_steps, dt):
 
 # Example usage
 particles = [
-    Particle(Vector3D(0.0, 0.0, 0.0), Vector3D(0.0, 0.0, 0.0), 1.0e10),
-    Particle(Vector3D(1.0, 0.0, 0.0), Vector3D(0.0, 1.0, 0.0), 1.0e10),
-    Particle(Vector3D(0.0, 1.0, 0.0), Vector3D(-1.0, 0.0, 0.0), 1.0e10)
+    Particle(Vector3D(0.49729, 0.966226, 0.428681), Vector3D(0.198307, 0.361111, 0.689255), 0.223625 * (10 ** 10)),
+    Particle(Vector3D(0.964621, 0.821291, 0.419606), Vector3D(0.662684, 0.587032, 0.16395), 0.364583 * (10 ** 10)),
+    Particle(Vector3D(0.020512, 0.015483, 0.220429), Vector3D(0.340974, 0.021423, 0.830723), 0.152234 * (10 ** 10)),
+    Particle(Vector3D(0.967333, 0.542652, 0.476052), Vector3D(0.267489, 0.542374, 0.945749), 0.289386 * (10 ** 10)),
+    Particle(Vector3D(0.129828, 0.036068, 0.901068), Vector3D(0.341789, 0.620712, 0.605176), 0.625194 * (10 ** 10)),
+    Particle(Vector3D(0.360191, 0.230534, 0.795457), Vector3D(0.645617, 0.484988, 0.961972), 0.848607 * (10 ** 10)),
+    Particle(Vector3D(0.966311, 0.59361, 0.141998), Vector3D(0.677856, 0.129522, 0.422948), 0.943829 * (10 ** 10)),
+    Particle(Vector3D(0.973433, 0.26352, 0.962326), Vector3D(0.091437, 0.564834, 0.232784), 0.014364 * (10 ** 10)),
+    Particle(Vector3D(0.859302, 0.90352, 0.46878), Vector3D(0.864171, 0.291022, 0.077413), 0.869917 * (10 ** 10)),
+    Particle(Vector3D(0.913648, 0.644178, 0.668867), Vector3D(0.971718, 0.82145, 0.852497), 0.349954 * (10 ** 10)),
+    Particle(Vector3D(0.474571, 0.435113, 0.346686), Vector3D(0.269302, 0.337521, 0.651064), 0.79614 * (10 ** 10)),
+    Particle(Vector3D(0.63553, 0.514166, 0.194046), Vector3D(0.11376, 0.185229, 0.999429), 0.91927 * (10 ** 10)),
 ]
 
-simulate(particles, num_steps=100, dt=0.01)
+simulate(particles, num_steps=50000, dt=0.001)
 for p in particles:
     print(f"Particle: position=({p.position.x}, {p.position.y}, {p.position.z}), "
           f"velocity=({p.velocity.x}, {p.velocity.y}, {p.velocity.z}), mass={p.mass}")

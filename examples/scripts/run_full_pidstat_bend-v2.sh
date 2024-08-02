@@ -1,21 +1,19 @@
 #!/bin/bash
 
-# Define Bend and OpenMP programs with their corresponding files
+# Define Bend, OpenMP, and Python programs with their corresponding files
 bend_programs=(
-  "bitonic_sort_random.bend"
-  "bitonic_sort_reverse.bend"
-  "bitonic_sort_skewed.bend"
-  "bitonic_sort_sorted.bend"
+  "n_body_sim.bend"
 )
 
 openmp_programs=(
-  "omp_bitonic_sort_random.c"
-  "omp_bitonic_sort_reverse.c"
-  "omp_bitonic_sort_skewed.c"
-  "omp_bitonic_sort_sorted.c"
+  "n_body_sim.c"
 )
 
-iterations=`echo {1..10}`
+python_programs=(
+  "n_body_sim_parallel.py"
+)
+
+iterations=`echo {1..12}`
 
 # Create a directory to store all results
 mkdir -p benchmark_results
@@ -35,6 +33,8 @@ monitor_metrics() {
   pidstat -d -p $pid 1 > "$results_dir/${prefix}_io_stats_$iteration.log" &
   # Monitor context switches
   pidstat -w -p $pid 1 > "$results_dir/${prefix}_context_switches_$iteration.log" &
+  # Monitor thread count
+  pidstat -t -p $pid 1 > "$results_dir/${prefix}_thread_count_$iteration.log" &
 }
 
 # Function to run and monitor a Bend program
@@ -46,7 +46,7 @@ run_bend_program() {
     echo "Running $program iteration $iteration..."
 
     # Start the Bend program in the background
-    bend run-c "../programs-gen/$program" >/dev/null 2>&1 &
+    bend run-c "../programs-original/$program" >/dev/null 2>&1 &
     local bend_pid=$!
 
     # Wait for the hvm process to start
@@ -56,7 +56,6 @@ run_bend_program() {
       sleep 1
     done
     echo "hvm process started with PID: $hvm_pid"
-
     # Monitor the hvm process
     monitor_metrics $hvm_pid $results_dir $iteration "hvm"
 
@@ -79,7 +78,7 @@ run_openmp_program() {
     echo "Running ${program%.c} iteration $iteration..."
 
     # Start the OpenMP program in the background
-    "../programs-gen/${program%.c}" > $program.txt & #>/dev/null 2>&1 &
+    "../programs-original/${program%.c}" > $program.txt & #>/dev/null 2>&1 &
     local openmp_pid=$!
 
     # Monitor the OpenMP process
@@ -95,16 +94,43 @@ run_openmp_program() {
   done
 }
 
+# Function to run and monitor a Python program
+run_python_program() {
+  local program=$1
+  local results_dir=$2
+  echo "Res dir 1: $results_dir"
+
+  for iteration in $iterations; do
+    echo "Running $program iteration $iteration..."
+
+    # Start the Python program in the background
+    python3 "../programs-original/$program" >/dev/null 2>&1 &
+    local python_pid=$!
+    echo "Res dir 2: $results_dir"
+
+    # Monitor the Python process
+    monitor_metrics $python_pid $results_dir $iteration "python"
+
+    # Wait for the Python program to finish
+    wait $python_pid
+
+    # Kill all pidstat processes monitoring the Python PID
+    pkill -P $$ pidstat
+
+    echo "Metrics for $program iteration $iteration logged to $results_dir"
+  done
+}
+
 # Compile OpenMP programs
 compile_openmp_programs() {
   for program in "${openmp_programs[@]}"; do
-    gcc -fopenmp "../programs-gen/$program" -o "../programs-gen/${program%.c}"
+    gcc -fopenmp "../programs-original/$program" -o "../programs-original/${program%.c}" -lm
     if [ $? -ne 0 ]; then
       echo "Failed to compile $program"
       exit 1
     fi
     # Ensure the compiled binary has execute permissions
-    chmod +x "../programs-gen/${program%.c}"
+    chmod +x "../programs-original/${program%.c}"
   done
 }
 
@@ -125,4 +151,12 @@ for program in "${openmp_programs[@]}"; do
   results_dir="benchmark_results/openmp/$program_name"
   mkdir -p "$results_dir"
   run_openmp_program "$program" "$results_dir"
+done
+
+# Run Python programs
+for program in "${python_programs[@]}"; do
+  program_name=$(basename "$program" .py)
+  results_dir="benchmark_results/python/$program_name"
+  mkdir -p "$results_dir"
+  run_python_program "$program" "$results_dir"
 done
