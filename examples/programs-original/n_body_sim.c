@@ -14,7 +14,6 @@ typedef struct {
 } Particle;
 
 void compute_forces(Particle *particles, Vector3D *forces, int num_particles, double G) {
-    #pragma omp parallel for
     for (int i = 0; i < num_particles; i++) {
         forces[i].x = forces[i].y = forces[i].z = 0.0;
     }
@@ -82,7 +81,7 @@ int main() {
     {{ 0.63553, 0.514166, 0.194046 }, { 0.11376, 0.185229, 0.999429 }, 0.91927 * powl(10, 10)},
 };
 
-    simulate(particles, num_particles, 50000, 0.001);
+    simulate(particles, num_particles, 500000, 0.001);
 
     for (int i = 0; i < num_particles; i++) {
         printf("Particle: position=(%f, %f, %f), velocity=(%f, %f, %f), mass=%f\n",

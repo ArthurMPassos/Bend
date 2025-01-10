@@ -1,0 +1,19 @@
+Statistics for openmp_n_body_sim_metrics.csv:
+        iteration  user_time  system_time  cpu_percent  elapsed_time  max_resident_set_size  minor_page_faults  involuntary_context_switches  exit_status
+mean        7.200      9.664        0.024      1182.80         0.816               2804.400             116.50                       148.000          0.0
+median      7.500      9.395        0.025      1183.00         0.790               2410.000             116.50                       143.500          0.0
+std         3.521      1.001        0.015         4.29         0.084               1288.539               1.08                        33.599          0.0
+
+
+Statistics for python_n_body_sim_parallel_metrics.csv:
+        iteration  user_time  system_time  cpu_percent  elapsed_time  max_resident_set_size  minor_page_faults  involuntary_context_switches  exit_status
+mean        6.200   1637.013      886.809      259.300       971.871              44364.400       5.026699e+08                     23257.000          0.0
+median      6.500   1640.835      887.455      259.500       969.920              44302.000       5.017932e+08                     15005.000          0.0
+std         3.425     14.029        9.268        1.059         9.842               3500.579       4.214762e+06                     26042.696          0.0
+
+
+Statistics for bend_n_body_sim_metrics.csv:
+        iteration  user_time  system_time  cpu_percent  elapsed_time  max_resident_set_size  minor_page_faults  involuntary_context_switches  exit_status
+mean         6.60    718.803     1322.085        799.0       255.277            3522237.600         876672.200                       577.000          0.0
+median       7.00    722.100     1276.030        799.0       252.470            3452790.000         858927.500                       414.000          0.0
+std          3.95     37.086      128.175          0.0        16.405            2855736.251         715469.934                       442.678          0.0

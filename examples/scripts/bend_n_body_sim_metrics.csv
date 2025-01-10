@@ -1,0 +1,11 @@
+command,iteration,user_time,system_time,cpu_percent,elapsed_time,max_resident_set_size,minor_page_faults,involuntary_context_switches,exit_status
+bend run-c ../programs-original/n_body_sim.bend,10,698.3,1187.55,799.0,236.0,6202792,1548625,1003,0
+bend run-c ../programs-original/n_body_sim.bend,11,730.12,1183.08,799.0,239.41,6090584,1519295,272,0
+bend run-c ../programs-original/n_body_sim.bend,6,714.08,1202.65,799.0,239.84,6315968,1576790,182,0
+bend run-c ../programs-original/n_body_sim.bend,1,661.76,1262.0,799.0,240.53,812200,198103,1331,0
+bend run-c ../programs-original/n_body_sim.bend,2,735.38,1239.32,799.0,247.11,6261616,1563286,776,0
+bend run-c ../programs-original/n_body_sim.bend,3,770.44,1290.06,799.0,257.83,6283276,1568386,503,0
+bend run-c ../programs-original/n_body_sim.bend,4,678.25,1483.95,799.0,270.34,813276,197664,84,0
+bend run-c ../programs-original/n_body_sim.bend,12,754.82,1427.54,799.0,272.85,814088,198376,325,0
+bend run-c ../programs-original/n_body_sim.bend,8,686.08,1505.57,799.0,274.06,814996,197637,198,0
+bend run-c ../programs-original/n_body_sim.bend,9,758.8,1439.13,799.0,274.8,813580,198560,1096,0

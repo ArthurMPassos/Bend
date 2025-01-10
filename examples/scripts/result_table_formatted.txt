@@ -1,0 +1,78 @@
+Statistics for openmp_n_body_sim:
+        user_time  system_time  elapsed_time  cpu_percent  max_resident_set_size
+mean        9.664        0.024         0.816      1182.80               2804.400
+median      9.395        0.025         0.790      1183.00               2410.000
+std         1.001        0.015         0.084         4.29               1288.539
+
+
+Statistics for python_n_body_sim:
+        user_time  system_time  elapsed_time  cpu_percent  max_resident_set_size
+mean     1637.013      886.809       971.871      259.300              44364.400
+median   1640.835      887.455       969.920      259.500              44302.000
+std        14.029        9.268         9.842        1.059               3500.579
+
+Statistics for bend_n_body_sim:
+        user_time  system_time  elapsed_time  cpu_percent  max_resident_set_size
+mean      718.803     1322.085       255.277        799.0             352223.760
+median    722.100     1276.030       252.470        799.0             345279.000
+std        37.086      128.175        16.405          0.0             285573.625
+
+
+
+\begin{table}[h!]
+\centering
+\caption{Estatísticas para execução da simulação N Body com OpenMP }
+\begin{tabular}{lcccccc}
+\hline
+       & user\_time & system\_time & elapsed\_time & cpu\_percent & max\_resident\_set\_size \\
+\hline
+mean   & 9.664      & 0.024       & 0.816         & 1182.80      & 2804.400                \\
+median & 9.395      & 0.025       & 0.790         & 1183.00      & 2410.000                \\
+\sigma  & 1.001      & 0.015       & 0.084         & 4.29         & 1288.539                \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Estatísticas para execução da simulação N Body com Python}
+\begin{tabular}{lcccccc}
+\hline
+       & user\_time & system\_time & elapsed\_time & cpu\_percent & max\_resident\_set\_size \\
+\hline
+média   & 1637.013   & 886.809      & 971.871       & 259.300      & 44364.400               \\
+mediana & 1640.835   & 887.455      & 969.920       & 259.500      & 44302.000               \\
+\sigma  & 14.029     & 9.268        & 9.842         & 1.059        & 3500.579                \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Estatísticas para execução da simulação N Body com Bend}
+\begin{tabular}{lcccccc}
+\hline
+       & user\_time & system\_time & elapsed\_time & cpu\_percent & max\_resident\_set\_size \\
+\hline
+mean   & 718.803    & 1322.085     & 255.277       & 799.0        & 352223.760              \\
+median & 722.100    & 1276.030     & 252.470       & 799.0        & 345279.000              \\
+\sigma & 37.086     & 128.175      & 16.405        & 0.0          & 285573.625              \\
+\hline
+\end{tabular}
+\end{table}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+\begin{table}[h!]
+\centering
+\caption{Estatísticas para execução da simulação N Body}
+\begin{tabular}{lcccccc}
+\hline
+ & user\_time & system\_time & elapsed\_time & cpu\_percent & max\_resident\_set\_size \\
+\hline
+Bend   & 718.803    & 1322.085     & 255.277       & 799.0        & 352223.760              \\
+Python   & 1637.013   & 886.809      & 971.871       & 259.300      & 44364.400               \\
+OpenMP  & 9.664      & 0.024       & 0.816         & 1182.80      & 2804.400                \\
+\hline
+\end{tabular}
+\end{table}

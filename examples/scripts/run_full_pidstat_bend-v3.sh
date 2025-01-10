@@ -144,17 +144,17 @@ compile_openmp_programs
 # done
 
 # Run OpenMP programs
-# for program in "${openmp_programs[@]}"; do
-#   program_name=$(basename "$program" .c)
-#   results_dir="benchmark_results/openmp/$program_name"
-#   mkdir -p "$results_dir"
-#   run_openmp_program "$program" "$results_dir"
-# done
+for program in "${openmp_programs[@]}"; do
+  program_name=$(basename "$program" .c)
+  results_dir="benchmark_results/openmp/$program_name"
+  mkdir -p "$results_dir"
+  run_openmp_program "$program" "$results_dir"
+done
 
 # Run Python programs
-for program in "${python_programs[@]}"; do
-  program_name=$(basename "$program" .py)
-  results_dir="benchmark_results/python/$program_name"
-  mkdir -p "$results_dir"
-  run_python_program "$program" "$results_dir"
-done
+# for program in "${python_programs[@]}"; do
+#   program_name=$(basename "$program" .py)
+#   results_dir="benchmark_results/python/$program_name"
+#   mkdir -p "$results_dir"
+#   run_python_program "$program" "$results_dir"
+# done

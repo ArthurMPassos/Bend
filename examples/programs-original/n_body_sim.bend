@@ -67,7 +67,7 @@ def get_particles():
 
 def main:
   particles = get_particles()
-  steps = 50000
+  steps = 500000
   timestep = 0.001
   final_particles = simulate(particles, steps, timestep)
   return final_particles

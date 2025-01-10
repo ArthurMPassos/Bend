@@ -18,13 +18,14 @@ def compute_forces_chunk(args):
     num_particles = len(particles)
     forces = [Vector3D(0, 0, 0) for _ in range(num_particles)]
     for i in range(start, end):
+        i_g_mass = G * particles[i].mass
         for j in range(num_particles):
             if i != j:
                 dx = particles[j].position.x - particles[i].position.x
                 dy = particles[j].position.y - particles[i].position.y
                 dz = particles[j].position.z - particles[i].position.z
                 distance = np.sqrt(dx**2 + dy**2 + dz**2)
-                force_magnitude = G * particles[i].mass * particles[j].mass / distance**2
+                force_magnitude = i_g_mass * particles[j].mass / distance**2
                 fx = force_magnitude * dx / distance
                 fy = force_magnitude * dy / distance
                 fz = force_magnitude * dz / distance
@@ -33,10 +34,7 @@ def compute_forces_chunk(args):
                 forces[i].z += fz
     return forces[start:end]
 
-def compute_forces_parallel(particles, G=6.67430e-11):
-    num_particles = len(particles)
-    num_chunks = cpu_count()
-    chunk_size = num_particles // num_chunks
+def compute_forces_parallel(particles, num_particles, num_chunks, chunk_size, G=6.67430e-11):
     args = [(particles, i * chunk_size, (i + 1) * chunk_size, G) for i in range(num_chunks)]
     
     with Pool(processes=num_chunks) as pool:
@@ -48,22 +46,41 @@ def compute_forces_parallel(particles, G=6.67430e-11):
         end = (i + 1) * chunk_size
         for j in range(start, end):
             forces[j] = forces_chunks[i][j - start]
-    
     return forces
 
-def update_particles(particles, forces, dt):
-    for i in range(len(particles)):
-        particles[i].velocity.x += forces[i].x / particles[i].mass * dt
-        particles[i].velocity.y += forces[i].y / particles[i].mass * dt
-        particles[i].velocity.z += forces[i].z / particles[i].mass * dt
-        particles[i].position.x += particles[i].velocity.x * dt
-        particles[i].position.y += particles[i].velocity.y * dt
-        particles[i].position.z += particles[i].velocity.z * dt
+def update_particles_chunk(particles, forces, dt, start, end):
+    updated_particles = []
+    for i in range(start, end):
+        particle = particles[i]
+        particle.velocity.x += forces[i].x / particle.mass * dt
+        particle.velocity.y += forces[i].y / particle.mass * dt
+        particle.velocity.z += forces[i].z / particle.mass * dt
+        particle.position.x += particle.velocity.x * dt
+        particle.position.y += particle.velocity.y * dt
+        particle.position.z += particle.velocity.z * dt
+        updated_particles.append(particle)
+    return updated_particles
+
+def update_particles_parallel(particles, forces, dt, num_chunks, chunk_size):
+    args = [(particles, forces, dt, i * chunk_size, (i + 1) * chunk_size) for i in range(num_chunks)]
+    
+    with Pool(processes=num_chunks) as pool:
+        updated_chunks = pool.starmap(update_particles_chunk, args)
+    
+    # Combine updated chunks
+    updated_particles = []
+    for chunk in updated_chunks:
+        updated_particles.extend(chunk)
+    return updated_particles
 
 def simulate(particles, num_steps, dt):
+    num_particles = len(particles)
+    num_chunks = cpu_count()
+    chunk_size = (num_particles + num_chunks - 1) // num_chunks  # Ensure all particles are covered
     for _ in range(num_steps):
-        forces = compute_forces_parallel(particles)
-        update_particles(particles, forces, dt)
+        forces = compute_forces_parallel(particles, num_particles, num_chunks, chunk_size)
+        particles = update_particles_parallel(particles, forces, dt, num_chunks, chunk_size)
+   
 
 # Example usage
 particles = [
@@ -81,7 +98,7 @@ particles = [
     Particle(Vector3D(0.63553, 0.514166, 0.194046), Vector3D(0.11376, 0.185229, 0.999429), 0.91927 * (10 ** 10)),
 ]
 
-simulate(particles, num_steps=50000, dt=0.001)
+simulate(particles, num_steps=500000, dt=0.001)
 for p in particles:
     print(f"Particle: position=({p.position.x}, {p.position.y}, {p.position.z}), "
           f"velocity=({p.velocity.x}, {p.velocity.y}, {p.velocity.z}), mass={p.mass}")

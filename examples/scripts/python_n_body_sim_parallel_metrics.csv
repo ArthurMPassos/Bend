@@ -1,0 +1,11 @@
+command,iteration,user_time,system_time,cpu_percent,elapsed_time,max_resident_set_size,minor_page_faults,involuntary_context_switches,exit_status
+python3 ../programs-original/n_body_sim_parallel.py,11,1621.23,877.66,260.0,960.05,49428,503265409,14332,0
+python3 ../programs-original/n_body_sim_parallel.py,9,1620.35,872.67,259.0,960.76,45564,500744815,14783,0
+python3 ../programs-original/n_body_sim_parallel.py,1,1613.08,876.69,258.0,961.66,49372,499815027,15217,0
+python3 ../programs-original/n_body_sim_parallel.py,2,1636.62,886.01,260.0,967.27,43276,505519844,14947,0
+python3 ../programs-original/n_body_sim_parallel.py,8,1646.72,886.03,261.0,969.27,45652,509841727,97369,0
+python3 ../programs-original/n_body_sim_parallel.py,10,1642.02,888.88,260.0,970.57,43272,499936771,15063,0
+python3 ../programs-original/n_body_sim_parallel.py,6,1639.65,890.81,259.0,976.77,45176,502841533,14913,0
+python3 ../programs-original/n_body_sim_parallel.py,5,1647.13,893.28,258.0,983.74,39236,499440251,14897,0
+python3 ../programs-original/n_body_sim_parallel.py,7,1654.27,904.02,260.0,983.88,43428,508570428,15451,0
+python3 ../programs-original/n_body_sim_parallel.py,3,1649.06,892.04,258.0,984.74,39240,496723180,15598,0
